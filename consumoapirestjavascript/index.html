@@ -16,9 +16,10 @@
                 <h1>Gatitos aleatorios</h1>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-primary" onclick="reload();">Recargar</button>
+                <button class="btn btn-primary" onclick="loadRadomCats();">Recargar</button>
             </div>
         </div>
+
         <div class="row row-col-3 g-2 mt-2">
             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                  <div class="card  text-white">
@@ -63,6 +64,9 @@
             <div class="col-6 col-sm-6 col-md-6 col-lg-4">
                 <div class="card bg-dark text-white">
                     <img id="img6" width="117px" height="250px" class="card-img" alt="Foto gatos aleatorio 3">
+                    <div class="card-img-overlay">
+                        <button type="button" class="btn btn-sm btn-warning position-absolute bottom-0 end-0">Favorito</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,3 @@
-console.log('hello world')
-
 //Link de consulta basica
 // const API_URL='https://api.thecatapi.com/v1/images/search'
 
@@ -9,6 +7,8 @@ console.log('hello world')
 // Esta api se trabajara con Application-based authentication
 //Adicionandole al parametro la api key obtenida registrandose
 const API_URL='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
+
+const API_URL_FAVURITE='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
 
 
 // ------------------------------------------------------------------
@@ -25,9 +25,7 @@ const API_URL='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64
 //Status errores del servidor
 // --------------------------------------------------------
 
-
-
-async function reload(){
+async function loadRadomCats(){
     const res = await fetch(API_URL);
     const data = await res.json();
     const img1 = document.getElementById('img1');
@@ -45,4 +43,4 @@ async function reload(){
     img6.src = data[5].url;
 }
 
-reload();
+loadRadomCats();
