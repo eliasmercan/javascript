@@ -8,7 +8,7 @@
 //Adicionandole al parametro la api key obtenida registrandose
 const API_URL='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
 
-const API_URL_FAVORITE='https://api.thecatapi.com/v1/images/favourites'
+const API_URL_FAVORITE='https://api.thecatapi.com/v1/favourites?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
 
 
 
@@ -67,11 +67,9 @@ async function saveFavorite(){
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
-            'x-api-key': '488e64e8-fe74-43c6-850f-0d6a5152ffa7'
-
         },
         body: JSON.stringify({
-            image_id:'dje'
+            'image_id':'dje',
         })
     });
     const data = await res.json();
@@ -80,6 +78,14 @@ async function saveFavorite(){
         spanError.innerHTML = 'Hubo un error API BOTON FAVORITE: ' + res.status +' '+data.message;
     }else{
         console.log('BOTON FAVORITOS: '+ data);
+        
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Agregado a favoritos con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
     }
 
     console.log(res)
