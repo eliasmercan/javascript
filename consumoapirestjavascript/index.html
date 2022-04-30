@@ -13,11 +13,13 @@
     <div class="container">
         <div class="row mt-2">
             <div class="col">
-                <h1>Gatitos aleatorios</h1>
+               <h1>Gatitos aleatorios</h1>
+               <span id="error"></span>
             </div>
             <div class="col-md-4">
-                <button class="btn btn-primary" onclick="loadRadomCats();">Recargar</button>
+                <button class="btn btn-primary" onclick="loadRandomCats();">Recargar</button>
             </div>
+
         </div>
 
         <div class="row row-col-3 g-2 mt-2">
@@ -25,7 +27,7 @@
                  <div class="card  text-white">
                     <img id="img1" width="117px" height="250px" class="card-img" alt="Foto gatos aleatorio 1">
                     <div class="card-img-overlay">
-                        <button type="button" class="btn btn-sm btn-warning position-absolute bottom-0 end-0">Favorito</button>
+                        <button id="btn1" onclick="saveFavorite();" type="button" class="btn btn-sm btn-warning position-absolute bottom-0 end-0">Favorito</button>
                     </div>
                   </div>
             </div>
@@ -33,7 +35,7 @@
                 <div class="card bg-dark text-white" >
                     <img id="img2" width="117px" height="250px" class="card-img" alt="Foto gatos aleatorio 2">
                     <div class="card-img-overlay">
-                        <button type="button" class="btn btn-sm btn-warning position-absolute bottom-0 end-0">Favorito</button>
+                        <button id="btn2" onclick="saveFavorite();" type="button" class="btn btn-sm btn-warning position-absolute bottom-0 end-0">Favorito</button>
                     </div>
                 </div>
             </div>
