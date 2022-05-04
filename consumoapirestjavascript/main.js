@@ -59,6 +59,39 @@ async function loadFavoriteCats(){
         spanError.innerHTML = 'Hubo un error API FAVORITE: ' + res.status +' '+data.message;
     }else{
         console.log('FAVORITOS: '+ data);
+        data.forEach(cat => {
+            //Construyendo la vista aleatoria para los favoritos
+
+            console.log('-----Cargando Imagenes');
+            console.log(cat.image.url)
+            console.log('-----Finalizando Imagenes');
+            const sectionFavorite = document.getElementById('favoritos');
+
+            const divFavorite = document.createElement('div');
+            divFavorite.className = 'col-6 col-sm-6 col-md-6 col-lg-4 pepo';
+            
+            const divCard = document.createElement('div')
+            divCard.className = 'card bg-dark text-white';
+            
+            const imgFavorite = document.createElement('img');
+            imgFavorite.className = 'card-img imgFavorites';
+            imgFavorite.src = cat.image.url
+
+            const overlayFavorite = document.createElement('div');
+            overlayFavorite.className = 'card-img-overlay';
+
+            const buttonFavorite = document.createElement('button');
+            buttonFavorite.className = 'btn btn-sm btn-danger position-absolute bottom-0 end-0';
+            const btnText = document.createTextNode('Quitar');
+
+            buttonFavorite.appendChild(btnText);
+            overlayFavorite.appendChild(buttonFavorite);
+            divCard.appendChild(imgFavorite);
+            divCard.appendChild(overlayFavorite);
+            divFavorite.appendChild(divCard);
+            sectionFavorite.appendChild(divFavorite)
+
+        } );
     }
 }
 
