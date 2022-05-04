@@ -10,9 +10,13 @@ const API_URL='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64
 
 const API_URL_FAVORITE='https://api.thecatapi.com/v1/favourites?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
 
+const API_URL_FAVORITE_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7`
+
 
 
 const spanError = document.getElementById('error');
+
+const tiempo = document.getElementById('tiempo');
 // ------------------------------------------------------------------
 // Status code 200 todo bien (resuestas satisfactorios)
 
@@ -41,6 +45,14 @@ async function loadRandomCats(){
         const img4 = document.getElementById('img4');
         const img5 = document.getElementById('img5');
         const img6 = document.getElementById('img6');
+
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const btn3 = document.getElementById('btn3');
+        const btn4 = document.getElementById('btn4');
+        const btn5 = document.getElementById('btn5');
+        const btn6 = document.getElementById('btn6');
+
         console.log(data);
         img1.src = data[0].url;
         img2.src = data[1].url;
@@ -48,6 +60,18 @@ async function loadRandomCats(){
         img4.src = data[3].url;
         img5.src = data[4].url;
         img6.src = data[5].url;
+
+        btn1.onclick = () => saveFavorite(data[0].id);
+        btn2.onclick = () => saveFavorite(data[1].id);
+        btn3.onclick = () => saveFavorite(data[2].id);
+        btn4.onclick = () => saveFavorite(data[3].id);
+        btn5.onclick = () => saveFavorite(data[4].id);
+        btn6.onclick = () => saveFavorite(data[5].id);
+
+        visibleSpiner();
+
+        const myTimeout = setTimeout(invisibleSpiner, 3000);
+
     }
 }
 
@@ -58,14 +82,16 @@ async function loadFavoriteCats(){
     if(res.status !== 200){
         spanError.innerHTML = 'Hubo un error API FAVORITE: ' + res.status +' '+data.message;
     }else{
-        console.log('FAVORITOS: '+ data);
+        const sectionFavorite = document.getElementById('favoritos');
+        sectionFavorite.innerHTML = "";
+
+        const h2 = document.createElement('h2');
+        h2.innerHTML = "Gatos Favoritos";
+
+        sectionFavorite.appendChild(h2);
+
         data.forEach(cat => {
             //Construyendo la vista aleatoria para los favoritos
-
-            console.log('-----Cargando Imagenes');
-            console.log(cat.image.url)
-            console.log('-----Finalizando Imagenes');
-            const sectionFavorite = document.getElementById('favoritos');
 
             const divFavorite = document.createElement('div');
             divFavorite.className = 'col-6 col-sm-6 col-md-6 col-lg-4 pepo';
@@ -83,6 +109,7 @@ async function loadFavoriteCats(){
             const buttonFavorite = document.createElement('button');
             buttonFavorite.className = 'btn btn-sm btn-danger position-absolute bottom-0 end-0';
             const btnText = document.createTextNode('Quitar');
+            buttonFavorite.onclick = () => deleteFavoriteCat(cat.id);
 
             buttonFavorite.appendChild(btnText);
             overlayFavorite.appendChild(buttonFavorite);
@@ -95,14 +122,14 @@ async function loadFavoriteCats(){
     }
 }
 
-async function saveFavorite(){
+async function saveFavorite(id){
     const res = await fetch(API_URL_FAVORITE, {
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            'image_id':'dje',
+            'image_id': id,
         })
     });
     const data = await res.json();
@@ -111,18 +138,63 @@ async function saveFavorite(){
         spanError.innerHTML = 'Hubo un error API BOTON FAVORITE: ' + res.status +' '+data.message;
     }else{
         console.log('BOTON FAVORITOS: '+ data);
-        
+
+        // if (res.status == 400){
+        //     Swal.fire({
+        //         position: 'center',
+        //         icon: 'error',
+        //         title: 'Ya fue eliminado la imagen de favoritos',
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //       })
+        //       exit();
+        // }
+
+
         Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Agregado a favoritos con exito',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
           })
+
+          loadFavoriteCats();
     }
 
     console.log(res)
     // const data = await res.json();
+}
+
+async function deleteFavoriteCat(id){
+    const res = await fetch(API_URL_FAVORITE_DELETE(id), {
+        method: 'DELETE',
+    });
+    const data = await res.json();
+
+    if(res.status !== 200){
+        spanError.innerHTML = 'Hubo un error API BOTON DELETE: ' + res.status +' '+data.message;
+    }else{
+        loadFavoriteCats();
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'Imagen eliminada de favoritos',
+            showConfirmButton: false,
+            timer: 1000
+          });
+
+          
+    }
+
+}
+
+function visibleSpiner(){
+    tiempo.className = 'spinner-border text-info visible';
+}
+
+function invisibleSpiner(){
+    tiempo.className = 'spinner-border text-info invisible';
 }
 
 loadRandomCats();
