@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 08 Numero aleatorio----------")
 var numeroAleatorio = document.querySelector("#numeroAleatorio");
 
 /* Numeros aleatorios

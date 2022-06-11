@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 02 Variables----------")
 var numero = 25
 console.log("Numero: ", numero);
 

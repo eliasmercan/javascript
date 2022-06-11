@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 04 Condiciones y cambios----------")
 // CONDICIONES
 
 var a = 5;

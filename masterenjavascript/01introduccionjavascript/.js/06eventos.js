@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 06 Eventos----------")
 // Eventos desde el DOM
 var recuadro = document.querySelector("#recuadro");
 

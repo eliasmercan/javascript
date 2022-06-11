@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 07 Intervalos y Retardos de tiempo----------")
 var tiempo = document.querySelector("#tiempo");
 var segundo = 1;
 

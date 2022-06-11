@@ -1,3 +1,4 @@
+console.log("----------Ejercicio 05 Ciclos----------")
 // CICLO FOR
 var cajas = document.querySelectorAll(".cajas");
 
