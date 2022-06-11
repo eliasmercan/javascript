@@ -1,3 +1,5 @@
+console.log('----------Modulo 02 POO: 01 Clases---------- ')
+
 /*Clases
 
 Son fuciones constructoras y siempre las vamos a iniciar con Mayuscula.
