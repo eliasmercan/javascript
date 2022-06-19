@@ -63,7 +63,12 @@ center{
 }
 
 #calculadora ul li:hover{
-    background: blue;
+    background: #FF335B;
+    color: white;
+}
+
+#calculadora ul li:active{
+    background: #900C3F;
     color: white;
 }
 
@@ -79,4 +84,14 @@ center{
     color: white;
     cursor:pointer;
     text-align: center;
+}
+
+#borrar:hover{
+    background: #8D33FF;
+    color: white;
+}
+
+#borrar:active{
+    background: blue;
+    color: white;
 }
