@@ -6,11 +6,14 @@
 
 // Esta api se trabajara con Application-based authentication
 //Adicionandole al parametro la api key obtenida registrandose
-const API_URL='https://api.thecatapi.com/v1/images/search?limit=6&api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
+const API_KEY = '488e64e8-fe74-43c6-850f-0d6a5152ffa7';
 
-const API_URL_FAVORITE='https://api.thecatapi.com/v1/favourites?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
+const API_URL='https://api.thecatapi.com/v1/images/search?limit=6'
 
-const API_URL_FAVORITE_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7`
+// const API_URL_FAVORITE='https://api.thecatapi.com/v1/favourites?api_key=488e64e8-fe74-43c6-850f-0d6a5152ffa7'
+const API_URL_FAVORITE='https://api.thecatapi.com/v1/favourites'
+
+const API_URL_FAVORITE_DELETE = (id) => `https://api.thecatapi.com/v1/favourites/${id}`
 
 
 
@@ -32,7 +35,12 @@ const tiempo = document.getElementById('tiempo');
 // --------------------------------------------------------
 
 async function loadRandomCats(){
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL,{
+        method: 'GET',
+        headers: {
+            'x-api-key': API_KEY,
+        },
+    });
     const data = await res.json();
 
     if(res.status !== 200){
@@ -76,7 +84,12 @@ async function loadRandomCats(){
 }
 
 async function loadFavoriteCats(){
-    const res = await fetch(API_URL_FAVORITE);
+    const res = await fetch(API_URL_FAVORITE, {
+        method: 'GET',
+        headers: {
+            'x-api-key': API_KEY,
+        },
+    });
     const data = await res.json();
 
     if(res.status !== 200){
@@ -127,6 +140,7 @@ async function saveFavorite(id){
         method: 'POST',
         headers:{
             'Content-Type': 'application/json',
+            'x-api-key': API_KEY,
         },
         body: JSON.stringify({
             'image_id': id,
@@ -169,6 +183,9 @@ async function saveFavorite(id){
 async function deleteFavoriteCat(id){
     const res = await fetch(API_URL_FAVORITE_DELETE(id), {
         method: 'DELETE',
+        headers: {
+            'x-api-key': API_KEY,
+        },
     });
     const data = await res.json();
 
