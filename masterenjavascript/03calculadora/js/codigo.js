@@ -3,6 +3,9 @@
 var p={
     teclas: document.querySelectorAll("#calculadora ul li"),
     accion: null,
+    digito: null,
+    operaciones: document.querySelector("#operaciones"),
+    cantidadSignos: 0,
 };
 
 // Objeto con los metodos de la calculadora
@@ -16,17 +19,32 @@ var m={
 
     oprimirTecla: function(tecla){
         p.accion = tecla.target.getAttribute("class");
-        m.calculadora(p.accion)
+        p.digito = tecla.target.innerHTML;
+        m.calculadora(p.accion, p.digito)
     },
 
-    calculadora: function(accion){
+    calculadora: function(accion, digito){
         switch(accion){
             case "numero":
-                console.log("numero")
+                p.cantidadSignos=0
+                if(p.operaciones.innerHTML == 0){
+                    p.operaciones.innerHTML = digito;
+                }else{
+                    p.operaciones.innerHTML += digito
+                }
                 break;
+
             case "signo":
-                console.log("signo")
+                p.cantidadSignos++
+                if(p.cantidadSignos == 1){
+                    if(p.operaciones.innerHTML==0){
+                        p.operaciones.innerHTML=0
+                    }else{
+                        p.operaciones.innerHTML += digito;
+                    }
+                }
                 break;
+
             case "decimal":
                 console.log("decimal")
                 break;
@@ -34,6 +52,10 @@ var m={
                 console.log("igual")
                 break;
         }
+    },
+
+    borrarCalculadora: function(){
+        p.operaciones.innerHTML = 0
     }
 }
 
