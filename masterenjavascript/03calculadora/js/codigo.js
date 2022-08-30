@@ -6,6 +6,8 @@ var p={
     digito: null,
     operaciones: document.querySelector("#operaciones"),
     cantidadSignos: 0,
+    cantidadDecimal: false,
+    resultado: false,
 };
 
 // Objeto con los metodos de la calculadora
@@ -30,7 +32,12 @@ var m={
                 if(p.operaciones.innerHTML == 0){
                     p.operaciones.innerHTML = digito;
                 }else{
-                    p.operaciones.innerHTML += digito
+                    if(p.resultado){
+                        p.resultado=false
+                        p.operaciones.innerHTML = digito
+                    }else{
+                        p.operaciones.innerHTML += digito
+                    }
                 }
                 break;
 
@@ -41,15 +48,23 @@ var m={
                         p.operaciones.innerHTML=0
                     }else{
                         p.operaciones.innerHTML += digito;
+                        p.cantidadDecimal=false;
+                        p.resultado=false
                     }
                 }
                 break;
 
             case "decimal":
-                console.log("decimal")
+                if(!p.cantidadDecimal){
+                    p.operaciones.innerHTML+=digito;
+                    p.cantidadDecimal = true
+                }else{
+
+                }
                 break;
             case "igual":
-                console.log("igual")
+                p.operaciones.innerHTML = eval(p.operaciones.innerHTML)
+                p.resultado= true
                 break;
         }
     },
