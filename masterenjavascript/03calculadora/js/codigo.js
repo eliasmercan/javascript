@@ -129,7 +129,7 @@ var m={
         switch(accion){
             case "numero":
                 p.cantidadSignos=0
-                if(p.operaciones.innerHTML == 0){
+                if(p.operaciones.innerHTML == "0"){
                     p.operaciones.innerHTML = digito;
                 }else{
                     if(p.resultado){
@@ -143,28 +143,37 @@ var m={
 
             case "signo":
                 p.cantidadSignos++
-                if(p.cantidadSignos == 1){
-                    if(p.operaciones.innerHTML==0){
+                if(p.cantidadSignos == "1"){
+                    if(p.operaciones.innerHTML=="0"){
                         p.operaciones.innerHTML=0
+                    }else if(p.cantidadDecimal){
+                        // alert('hola2')
+                        p.operaciones.innerHTML += digito
+                        p.cantidadSignos=0
+                        p.cantidadDecimal=false
                     }else{
                         p.operaciones.innerHTML += digito;
                         p.cantidadDecimal=false;
                         p.resultado=false
                     }
+                }else{
+                    alert('hola')
                 }
                 break;
 
             case "decimal":
-                if(!p.cantidadDecimal){
+                if(!p.cantidadDecimal && p.cantidadSignos!=1){
                     p.operaciones.innerHTML+=digito;
                     p.cantidadDecimal = true
                     p.resultado=false
-                }else{
-
                 }
                 break;
             case "igual":
                 p.operaciones.innerHTML = eval(p.operaciones.innerHTML)
+                var expresion = /./g
+                if(!expresion.test(p.operaciones.innerHTML)){
+                    p.cantidadDecimal = true
+                }
                 p.resultado= true
                 break;
         }
@@ -172,6 +181,7 @@ var m={
 
     borrarCalculadora: function(){
         p.resultado= false
+        p.cantidadDecimal=false
         p.operaciones.innerHTML = 0
     }
 }
