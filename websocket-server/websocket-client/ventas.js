@@ -6,7 +6,7 @@ const btnCancel = document.getElementById("btnCancel")
 const btnSale = document.getElementById("btnSale")
 const productId = document.getElementById("productId")
 const amount = document.getElementById("amount")
-const dataChart = [01, 20, 10, 10]
+const dataChart = [0, 0, 0, 0]
 
 // ***** MODAL init *****
 const showModal = show => {
@@ -63,3 +63,31 @@ const myChart = new Chart(ctx, {
   }
 });
 // ***** The chart end *****
+
+// ***** WebSocket logic init *****
+const ws = new WebSocket("ws://localhost:8080")
+ws.addEventListener("open", evt => {
+  console.log("Conectado!!!")
+})
+
+ws.addEventListener("error", evt => {
+    console.log(evt)
+})
+
+btnSale.addEventListener("click", evt=>{
+    evt.preventDefault()
+    const sale={
+        productId: parseInt(productId.value, 10),
+        amount: parseInt(amount.value, 10)
+    }
+    ws.send(JSON.stringify(sale))
+    showModal(false)
+})
+
+ws.addEventListener("message", ({data})=>{
+    const val = JSON.parse(data)
+    const index = val.productId-1
+    dataChart[index]+=val.amount
+    myChart.update()
+    console.log("hecho click")
+})
