@@ -7,7 +7,8 @@ ws.addEventListener("open", (evt)=>{
 })
 
 ws.addEventListener("message", (evt)=>{
-    console.log(`Recibido del servidor: ${evt.data}`)
+    console.log(`Recibido del servidor`)
+    console.log(JSON.parse(evt.data))
 })
 
 ws.addEventListener("close", (evt)=>{
@@ -19,8 +20,13 @@ const boton= document.getElementById("btnSend")
 const texto= document.getElementById("texto")
 boton.addEventListener("click", (evt)=>{
     evt.preventDefault()
-    // ws.send("Hola Mundo")
-    ws.send(texto.value)
+    const person = {
+        name: "Elias",
+        company: "AyudaTIC.xyz",
+        isProfessor: true
+    }
+    // ws.send(texto.value)
+    ws.send(JSON.stringify(person))
 })
 
 const close= document.getElementById("btncerrar")
