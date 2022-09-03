@@ -1,6 +1,8 @@
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 
+const clients = []
+
 //Crear un servidor con peticion http pero que no abre un sitio web
 const server = http.createServer((request, response) => {
     console.log((new Date()) + ' Received request for ' + request.url);
@@ -37,20 +39,25 @@ wsServer.on('request', (request)=> {
     
     //Acepta la conexion cuando se pida el cliente
     const connection = request.accept(null, request.origin);
+    clients.push(connection)
     console.log((new Date()) + ' Connection accepted.');
 
     //Cuando se recibe un mensaje del cliente
     connection.on('message', (message)=> {
         if (message.type === 'utf8') {
             console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
+            clients.forEach(client => client.sendUTF(message.utf8Data))
         }
         else if (message.type === 'binary') {
             console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
-            connection.sendBytes(message.binaryData);
+            clients.forEach(client => client.sendBytes(message.binaryData))
         }
     });
     connection.on('close', (reasonCode, description)=> {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+        const index = clients.indexOf(connection)
+        if (index >-1){
+            clients.splice(index, 1)
+        }
     });
 });
