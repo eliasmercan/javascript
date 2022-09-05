@@ -4,7 +4,9 @@ var p={
     item: 0,
     cajaSlide: document.querySelector("#slide ul"),
     animacionSlide: "fade",
-    imgSlide: document.querySelector("#slide ul li")
+    imgSlide: document.querySelectorAll("#slide ul li"),
+    avanzar: document.querySelector("#slide avanzar"),
+    retroceder: document.querySelector("#slide retroceder"),
 }
 // Objeto con los metodos del slide
 var m={
@@ -12,6 +14,8 @@ var m={
         for(var i=0; i < p.paginacion.length; i++){
             p.paginacion[i].addEventListener("click", m.paginacionSlide)
         }
+        avanzar.addEventListener("click", m.avanzar)
+        retroceder.addEventListener("click", m.retroceder)
     },
 
     paginacionSlide: function(item){
@@ -19,8 +23,22 @@ var m={
         m.movimientoSlide(p.item)
     },
 
+    avanzar: function(){
+        //if ternario
+        p.item == p.imgSlide.length-1 ? p.item=0 : p.item++
+        console.log("p.item: ", p.item);
+        m.movimientoSlide(p.item)
+    },
+
+    retroceder: function(){
+        console.log("p.item-retroceder: ", p.item);
+        p.item == 0 ? p.item= p.imgSlide.length-1 : p.item--
+        console.log("p.item: ", p.item);
+        m.movimientoSlide(p.item)
+    },
+
     movimientoSlide: function(item){
-        alert("HOLA item "+ item)
+        // alert("HOLA item "+ item)
         p.cajaSlide.style.left = item* -100 +"%"
         
         for(var i=0; i < p.paginacion.length; i++){
@@ -34,10 +52,11 @@ var m={
         }
 
         if(p.animacionSlide=="fade"){
-            alert("fade")
-            for(var i=0; i < p.imgSlide.length; i++){
-                p.paginacion[i].style.opacity = 0
-            }
+        //    alert("fade")
+            p.paginacion[item].style.opacity = 0
+            p.paginacion[item].style.transition= ".7s left ease-in-out"
+            setTimeout(function(){ p.paginacion[item].style.opacity = 1 }, 50)
+
         }
 
     }
