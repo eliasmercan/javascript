@@ -5,8 +5,8 @@ var p={
     cajaSlide: document.querySelector("#slide ul"),
     animacionSlide: "fade",
     imgSlide: document.querySelectorAll("#slide ul li"),
-    avanzar: document.querySelector("#slide avanzar"),
-    retroceder: document.querySelector("#slide retroceder"),
+    avanzar: document.querySelector("#slide #avanzar"),
+    retroceder: document.querySelector("#slide #retroceder"),
     velocidadSlide: 3000,
     formatearLoop: false
 }
