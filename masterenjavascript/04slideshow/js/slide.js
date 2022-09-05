@@ -7,6 +7,8 @@ var p={
     imgSlide: document.querySelectorAll("#slide ul li"),
     avanzar: document.querySelector("#slide avanzar"),
     retroceder: document.querySelector("#slide retroceder"),
+    velocidadSlide: 3000,
+    formatearLoop: false
 }
 // Objeto con los metodos del slide
 var m={
@@ -16,6 +18,7 @@ var m={
         }
         avanzar.addEventListener("click", m.avanzar)
         retroceder.addEventListener("click", m.retroceder)
+        m.intervalo()
     },
 
     paginacionSlide: function(item){
@@ -26,19 +29,19 @@ var m={
     avanzar: function(){
         //if ternario
         p.item == p.imgSlide.length-1 ? p.item=0 : p.item++
-        console.log("p.item: ", p.item);
         m.movimientoSlide(p.item)
     },
 
     retroceder: function(){
-        console.log("p.item-retroceder: ", p.item);
         p.item == 0 ? p.item= p.imgSlide.length-1 : p.item--
-        console.log("p.item: ", p.item);
         m.movimientoSlide(p.item)
     },
 
     movimientoSlide: function(item){
         // alert("HOLA item "+ item)
+
+        p.formatearLoop = true
+
         p.cajaSlide.style.left = item* -100 +"%"
         
         for(var i=0; i < p.paginacion.length; i++){
@@ -52,14 +55,19 @@ var m={
         }
 
         if(p.animacionSlide=="fade"){
-        //    alert("fade")
             p.paginacion[item].style.opacity = 0
             p.paginacion[item].style.transition= ".7s left ease-in-out"
             setTimeout(function(){ p.paginacion[item].style.opacity = 1 }, 50)
-
         }
+    },
 
+    intervalo: function(){
+        setInterval(function(){
+            //if ternario
+            p.formatearLoop ? p.formatearLoop=false : m.avanzar()
+        }, p.velocidadSlide)
     }
+
 }
 
 m.inicioSlide()
