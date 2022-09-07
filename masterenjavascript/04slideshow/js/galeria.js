@@ -20,7 +20,7 @@ var mg={
     },
 
     lightbox: function(img){
-        pg.cuerpoDom.appendChild(document.createElement("DIV").setAttribute("id", "lightbox"))
+        pg.cuerpoDom.append(document.createElement("DIV").setAttribute("id", "lightbox"))
         pg.lightbox=document.querySelector("#lightbox")
     }
 }
