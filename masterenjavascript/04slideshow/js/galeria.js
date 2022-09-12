@@ -20,8 +20,17 @@ var mg={
     },
 
     lightbox: function(img){
-        pg.cuerpoDom.append(document.createElement("DIV").setAttribute("id", "lightbox"))
-        pg.lightbox=document.querySelector("#lightbox")
+        const div = document.createElement("div").setAttribute("id", "lightbox")
+        pg.cuerpoDom.append(div)
+        pg.lightbox=document.getElementById("lightbox")
+        // pg.lightbox=document.querySelector("#lightbox")
+        pg.lightbox.style.width = "100%"
+        pg.lightbox.style.height = "100%"
+        pg.lightbox.style.position = "fixed"
+        pg.lightbox.style.zIndex = "10"
+        pg.lightbox.style.background=rgba(0,0,0,.8);
+        pg.lightbox.style.background=rgba(0,0,0,.8);
+        pg.lightbox.style.top=0;
     }
 }
 
