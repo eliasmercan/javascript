@@ -1,0 +1,18 @@
+{
+  "name": "read-pdf",
+  "version": "1.0.0",
+  "description": "Leer documentos en PDF",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "PDF-JAVASCRIPT"
+  ],
+  "author": "Elias Mercado Cantero",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  }
+}
