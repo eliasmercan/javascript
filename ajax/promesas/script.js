@@ -34,6 +34,13 @@ promesa.addEventListener("click", ()=>{
     console.log("Termina el proceso")
 })
 
-asyncawait.addEventListener("click", ()=>{
-
+asyncawait.addEventListener("click", async()=>{
+    console.log("Empieza el proceso")
+    try{
+        const resp = await saludar("")
+        write(resp)
+    }catch(error){
+        console.log(error)
+    }
+    console.log("Termina el proceso")
 })
