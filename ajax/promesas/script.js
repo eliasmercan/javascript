@@ -4,6 +4,11 @@ const promesa = document.getElementById("promesa")
 const asyncawait = document.getElementById("asyncawait")
 const btnFetch = document.getElementById("btnFetch")
 
+const myForm = document.getElementById("myForm")
+const title = document.getElementById("title")
+const author = document.getElementById("author")
+const btnCreate = document.getElementById("btnCreate")
+
 const saludar = (name)=>{
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
@@ -55,7 +60,7 @@ btnFetch.addEventListener("click", async()=>{
 
     /* Metodo usando Asyn&Await*/
     try{
-        const response = await fetch("http://localhost:3000/poasts")
+        const response = await fetch("http://localhost:3000/posts")
         //Controlar codigo de respuestas si hay errores
         if(response.status !== 200){
             const message = await response.json()
@@ -65,5 +70,36 @@ btnFetch.addEventListener("click", async()=>{
         console.log(data)
     }catch(err){
         console.log(err)
+    }
+})
+
+myForm.addEventListener("submit", (e)=>{
+    e.preventDefault()
+})
+
+btnCreate.addEventListener("click", async()=>{
+    const post = {
+        title: title.value,
+        author: author.value
+    }
+    const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/json')
+    myHeaders.append('Authorization', 'token') //Opcional - no es valido en este ejercicio
+
+    const myInit = {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: myHeaders
+    }
+    try{
+        const reponse = await fetch("http://localhost:3000/posts", myInit)
+        if(response.status!==201){
+            console.log("oops no pudimos crear el recurso")
+            return
+        }
+        const data = await response.json()
+        console.log("recurso creado correctamente", data)
+    }catch(err){
+        console.log("opps, hubo un error", err)
     }
 })
