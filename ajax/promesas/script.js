@@ -55,7 +55,12 @@ btnFetch.addEventListener("click", async()=>{
 
     /* Metodo usando Asyn&Await*/
     try{
-        const response = await fetch("http://localhost:3000/posts")
+        const response = await fetch("http://localhost:3000/poasts")
+        //Controlar codigo de respuestas si hay errores
+        if(response.status !== 200){
+            const message = await response.json()
+            console.log("Oops, parece que algo salio mal", message)
+        }
         const data = await response.json()
         console.log(data)
     }catch(err){
