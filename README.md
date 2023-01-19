@@ -6,10 +6,12 @@ Proyecto de Ed.Team donde se enseña el manejo de las alternativas a Ajax usando
 ## 2. consumoapirestjavascript
 Proyecto de platzi donde se enseña al manejo de api rest con javascript
 
-## 3. Masterjavascript
+## 3. javascriptintensivo
+Proyecto enfocado al aprendizaje de javascript fuente curso de udemy Codigo 369
+## 4. Masterjavascript
 Proyecto enfocado al aprendizaje de javascript fuente curso de udemy Juan Fernando Urrego (Máster en JavaScript: ECMAScript, Angular 9+, React, NodeJS)
 
-## 4. npm-init
+## 5. npm-init
 Proyecto enfocado al aprendizaje del uso de npm como herramienta importante para el despliegue de dependencias en NodeJS
 ### Comandos basicos:
 1. *npm init* Inicializa el proyecto pregunta por el nombre del proyecto, version, descripcion, licencia de código.
@@ -20,9 +22,6 @@ Proyecto enfocado al aprendizaje del uso de npm como herramienta importante para
 6.  *npm install -g "namedependece"*  Instala la dependencia en modo global y puede ser llamado desde la linea de comandos.
 7.  *npm list*  Muestra el listado de las dependencias instaladas.
 8.  *npm list -g*  Muestra el listado de las dependencias instaladas globalmente.
-
-## 5. consumoapirestjavascript
-Proyecto de ejemplo como leer un pdf usando NodeJs y procesar su contenido.
 
 ## 6. websocket-server
 Practica de Wecksocket sencillo (No maneja seguridad). La fuente de este proyecto es el curso de Ed.team url: https://ed.team/cursos/websockets
